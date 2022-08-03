@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+// https://fakestoreapi.com/products
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [data, setData] = useState();
+  const [apiError, setApiError] = useState();
+  const getData = () => {
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch(setApiError(true));
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  if (data) {
+    return (
+      <div>
+        <h2>Store</h2>
+        <article>
+          {data.map((item) => {
+            return <p key={item.id}>{item.title}</p>;
+          })}
+        </article>
+      </div>
+    );
+  } else if (apiError) {
+    return (
+      <div>
+        <h2>api</h2>
+        <article>
+          <p>Content failed to load, please try again</p>
+        </article>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h2>Cat Fact Page</h2>
+        <article>
+          <p>The content is loading</p>
+        </article>
+      </div>
+    );
+  }
 }
 
 export default App;
