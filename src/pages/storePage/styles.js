@@ -9,6 +9,7 @@ export const PageContainer = styled.main`
 
 export const StyledCard = styled.article`
   display: flex;
+  background-color: white;
   flex-direction: column;
   border: solid black 3px;
   color: grey;
