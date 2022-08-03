@@ -5,6 +5,7 @@ export const PageContainer = styled.main`
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  background-color: #282c34;
 `;
 
 export const StyledCard = styled.article`
@@ -21,12 +22,19 @@ export const StyledCard = styled.article`
   justify-content: center;
   border-radius: 15px;
   position: relative;
+
+  @media screen and (max-width: 480px) {
+    width: 90%;
+  }
 `;
 
 export const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 2rem;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export const StyledBtn = styled.button`
@@ -35,6 +43,10 @@ export const StyledBtn = styled.button`
   border-radius: 15px;
   position: absolute;
   bottom: 1rem;
+
+  :hover {
+    transform: scale(1, 1.2);
+  }
 `;
 
 export const StyledImage = styled.img`
