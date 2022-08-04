@@ -17,9 +17,6 @@ const StorePage = () => {
   const [data, setData] = useState();
   const [apiError, setApiError] = useState();
 
-  // State used to track shopping-cart
-  const [cart, setCart] = useState({});
-
   // function that fetches the items for the shop-able items
   const getData = () => {
     axios
@@ -30,8 +27,6 @@ const StorePage = () => {
       .catch(setApiError(true));
   };
 
-  const addToCart = () => {};
-
   //useEffect fires getData on pageload
   useEffect(() => {
     getData();
@@ -40,28 +35,23 @@ const StorePage = () => {
   // if the data exists it will return the items, if not se else if and else
   if (data) {
     return (
-      <PageContainer>
-        <h2>Store</h2>
-        <StyledContainer>
-          {data.map((item, props) => {
-            return (
-              <StyledCard key={item.id}>
-                <StyledImage src={item.image}></StyledImage>
-                <StyledParagraph>{item.title}</StyledParagraph>
-                <StyledParagraph>{item.price} $</StyledParagraph>
-                <StyledBtn
-                  onClick={() => {
-                    setCart(...cart, item);
-                    console.log(cart);
-                  }}
-                >
-                  Buy
-                </StyledBtn>
-              </StyledCard>
-            );
-          })}
-        </StyledContainer>
-      </PageContainer>
+      <>
+        <PageContainer>
+          <h2>Store</h2>
+          <StyledContainer>
+            {data.map((item) => {
+              return (
+                <StyledCard key={item.id}>
+                  <StyledImage src={item.image}></StyledImage>
+                  <StyledParagraph>{item.title}</StyledParagraph>
+                  <StyledParagraph>{item.price} $</StyledParagraph>
+                  <StyledBtn>Buy</StyledBtn>
+                </StyledCard>
+              );
+            })}
+          </StyledContainer>
+        </PageContainer>
+      </>
     );
   }
 
