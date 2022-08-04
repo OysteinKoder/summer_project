@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const StorePage = () => {
   // States used for api calls, data will contain shopping items, apiError is a bool that is self explaining
   const [data, setData] = useState();
-  const [apiError, setApiError] = useState();
+  const [apiError, setApiError] = useState(false);
 
   let currentCart = [];
 
@@ -27,7 +27,7 @@ const StorePage = () => {
       .then((res) => {
         setData(res.data);
       })
-      .catch(setApiError(true));
+      .catch(() => setApiError(true));
   };
 
   //useEffect fires getData on pageload
