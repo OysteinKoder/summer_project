@@ -9,6 +9,7 @@ import {
   StyledParagraph,
   PageContainer,
 } from "./storePage/styles";
+import { Link } from "react-router-dom";
 
 // This file renders the StorePage and contains items you can add to basket for later purchase
 
@@ -16,6 +17,8 @@ const StorePage = () => {
   // States used for api calls, data will contain shopping items, apiError is a bool that is self explaining
   const [data, setData] = useState();
   const [apiError, setApiError] = useState();
+
+  let currentCart = [];
 
   // function that fetches the items for the shop-able items
   const getData = () => {
@@ -45,11 +48,27 @@ const StorePage = () => {
                   <StyledImage src={item.image}></StyledImage>
                   <StyledParagraph>{item.title}</StyledParagraph>
                   <StyledParagraph>{item.price} $</StyledParagraph>
-                  <StyledBtn>Buy</StyledBtn>
+                  <StyledBtn
+                    onClick={() => {
+                      currentCart.push(item);
+                      console.log(currentCart);
+                    }}
+                  >
+                    Buy
+                  </StyledBtn>
                 </StyledCard>
               );
             })}
           </StyledContainer>
+          <Link to="/cart-page">
+            <StyledBtn
+              onClick={() => {
+                localStorage.setItem("cart", JSON.stringify(currentCart));
+              }}
+            >
+              To Cart
+            </StyledBtn>
+          </Link>
         </PageContainer>
       </>
     );
